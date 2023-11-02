@@ -78,7 +78,7 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
   const deleteAllFiles = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_URL}/files`, {
+      const response = await fetch(`${API_URL}/files/delete`, {
         method: "DELETE",
       });
 
