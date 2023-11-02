@@ -5,6 +5,7 @@ import { DataRow } from "./StorageService";
 jest.mock("./StorageService", () => ({
   storageService: {
     searchData: jest.fn(),
+    clearData: jest.fn(),
   },
 }));
 
@@ -12,6 +13,7 @@ describe("UserService", () => {
   let userService: UserService;
 
   beforeEach(() => {
+    jest.clearAllMocks();
     userService = new UserService();
   });
 
@@ -41,4 +43,10 @@ describe("UserService", () => {
     expect(results).toEqual(expectedResults);
     expect(storageService.searchData).toHaveBeenCalledWith(searchTerm);
   });
+
+  it("should delete all users", () => {
+    userService.deleteAllUsers();
+    expect(storageService.clearData).toHaveBeenCalled();
+  });
+
 });

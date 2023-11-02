@@ -21,6 +21,10 @@ export class StorageService {
     );
   }
 
+  clearData(): void {
+    this.data.clear();
+  }
+
   normalizeDataRow(dataRow: DataRow): DataRow {
     const normalizedDataRow: DataRow = {};
     for (const [key, value] of Object.entries(dataRow)) {
