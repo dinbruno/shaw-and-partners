@@ -4,10 +4,8 @@ import { useCsvData } from "@/context/CsvContext";
 import TableSkeleton from "@/components/Skeleton";
 import Image from "next/image";
 import notFound from "@/assets/gifs/not-found.gif";
-import SearchComponent from "../Search";
 
 const TableComponent: React.FC<TableComponentProps> = ({
-  onEditUser,
   openModal,
 }) => {
   const { loading, csvData } = useCsvData();
@@ -25,7 +23,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
                   </h1>
                   <p className="mt-2 text-sm text-gray-700">
                     A list of all users entered via the csv document with data
-                    such as their name, city, country and favorite sport{" "}
+                    such as their name, city, country and favorite sport
                   </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 flex gap-4 justify-end md:justify-normal">
@@ -105,7 +103,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
           <div className="flex justify-center items-center">
             <div>
               <h1 className="mt-6 text-lg leading-8 text-gray-900">
-                Sorry, we couldn't find the result you were looking for...
+                Sorry, we couldn&#39;t find the result you were looking for...
               </h1>
               <Image src={notFound} alt="Not found" />
             </div>

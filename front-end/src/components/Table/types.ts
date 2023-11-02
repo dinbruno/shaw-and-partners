@@ -6,6 +6,5 @@ export interface User {
 }
 
 export interface TableComponentProps {
-    onEditUser?: (User: User) => void;
     openModal?: () => void;
 }
