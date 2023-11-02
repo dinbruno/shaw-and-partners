@@ -1,10 +1,10 @@
 import "express-async-errors";
 import express from "express";
 import cors from "cors";
-import fileRoutes from "./src/routes/file.routes";
-import userRoutes from "./src/routes/user.routes";
-import requestLoggerMiddleware from "./src/middlewares/requestLogger.middleware";
-import errorHandlingMiddleware from "./src/middlewares/errorHandling.middleware";
+import fileRoutes from "./routes/file.routes";
+import userRoutes from "./routes/user.routes";
+import requestLoggerMiddleware from "./middlewares/requestLogger.middleware";
+import errorHandlingMiddleware from "./middlewares/errorHandling.middleware";
 
 const app = express();
 
