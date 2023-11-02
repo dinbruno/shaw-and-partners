@@ -6,8 +6,8 @@
   "engines": {
     "node": "18.x"
   },
-  "scripts": {
-    "start": "ts-node server.ts",
+  "scripts": {  
+    "start": "node server.ts",
     "dev": "ts-node server.ts",
     "test": "jest"
   },
