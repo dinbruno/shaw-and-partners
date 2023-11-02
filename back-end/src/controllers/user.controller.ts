@@ -11,10 +11,10 @@ class UserController {
   deleteAllUsers(req: Request, res: Response) {
     try {
       storageService.clearData();
-      return res.status(200).json({ message: 'Todos os usuários foram deletados com sucesso.' });
+      return res.status(200).json({ message: 'All users have been successfully deleted.' });
     } catch (error) {
-      console.error('Erro ao deletar todos os usuários: ', error);
-      return res.status(500).json({ message: 'Erro interno do servidor ao tentar deletar todos os usuários.' });
+      console.error('Error deleting all users: ', error);
+      return res.status(500).json({ message: 'Internal server error while trying to delete all users.' });
     }
   }
 

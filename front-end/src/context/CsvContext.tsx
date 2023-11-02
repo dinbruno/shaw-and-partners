@@ -100,8 +100,8 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
         throw new Error(errorData.message);
       }
     } catch (error: any) {
-      console.error("Erro ao deletar arquivos:", error);
-      toast.error(`Erro ao deletar arquivos: ${error.message}`);
+      console.error("Error deleting files:", error);
+      toast.error(`Error deleting files: ${error.message}`);
     } finally {
       setTimeout(() => {
         setLoading(false);
