@@ -1,7 +1,6 @@
 import { User } from "@/components/Table/types";
 import { ReactNode } from "react";
 
-
 export interface CsvDataContextProps {
   csvData: User[];
   uploadCsv: (file: File) => Promise<void>;
