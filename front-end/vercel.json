@@ -1,7 +1,7 @@
 {
     "headers": [
       {
-        "source": "https://shaw-and-partners-backend.vercel.app/api/users",
+        "source": "https://shaw-and-partners-backend-n5xh.onrender.com/api",
         "headers": [
           { "key": "Access-Control-Allow-Credentials", "value": "true" },
           { "key": "Access-Control-Allow-Origin", "value": "*" },
