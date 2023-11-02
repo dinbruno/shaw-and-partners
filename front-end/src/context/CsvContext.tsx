@@ -8,13 +8,17 @@ import React, {
   useEffect,
 } from "react";
 import useSWR from "swr";
-import { CsvDataContextProps, CsvDataProviderProps } from "./types";
+import { CsvDataContextProps, CsvDataProviderProps, LogEntry } from "./types";
 import { toast } from "react-toastify";
 import { API_URL } from "@/api/config";
 
 const CsvDataContext = createContext<CsvDataContextProps | undefined>(
   undefined
 );
+
+const LOG_KEY = 'uploadLogs';
+
+const generateLogId = () => `log_${new Date().getTime()}`;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -23,13 +27,18 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
 }) => {
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [uploadLogs, setUploadLogs] = useState<LogEntry[]>(() => {
+    const logs = localStorage.getItem(LOG_KEY);
+    return logs ? JSON.parse(logs) as LogEntry[] : [];
+  });
+
   const { data } = useSWR(`${API_URL}/users`, fetcher);
 
-  useEffect(() => {
-    if (data?.data) {
-      setCsvData(data.data);
-    }
-  }, [data]);
+  const addLogEntry = (logEntry: LogEntry) => {
+    const updatedLog = [logEntry, ...uploadLogs];
+    localStorage.setItem(LOG_KEY, JSON.stringify(updatedLog));
+    setUploadLogs(updatedLog);
+  };
 
   const uploadCsv = async (file: File) => {
     setLoading(true);
@@ -44,8 +53,14 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
 
       const result = await response.json();
       if (response.ok) {
-        console.log(result.message);
-        toast.success("Document successfully sent! 😀");
+        const logEntry = {
+          id: generateLogId(),
+          message: "Upload de um arquivo feito em",
+          date: new Date().toLocaleString(),
+        };
+
+        addLogEntry(logEntry);
+        toast.success("Document successfully sent!");
       } else {
         throw new Error(result.message);
       }
@@ -78,9 +93,15 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
     }
   }, [data]);
 
+  useEffect(() => {
+    if (data?.data) {
+      setCsvData(data.data);
+    }
+  }, [data]);
+
   return (
     <CsvDataContext.Provider
-      value={{ csvData, uploadCsv, searchCsvData, loading, clearSearch  }}
+      value={{ csvData, uploadCsv, searchCsvData, loading, clearSearch, uploadLogs  }}
     >
       {children}
     </CsvDataContext.Provider>

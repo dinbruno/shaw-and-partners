@@ -9,8 +9,15 @@ export interface CsvDataContextProps {
   loading?: boolean; 
   error?: string | null;
   clearSearch?: () => void;
+  uploadLogs: LogEntry[];
 }
 
 export interface CsvDataProviderProps {
   children: ReactNode;
+}
+
+export interface LogEntry {
+  id: string;
+  message: string;
+  date: string; 
 }
