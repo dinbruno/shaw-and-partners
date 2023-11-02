@@ -99,17 +99,8 @@ For local backend setup:
 
 The application is fully deployed and can be accessed at the following URLs:
 
+# Because the hosted servers are free, performance may not be the best, I recommend running local with local pointing
+
 - **Frontend**: [https://shaw-and-partners-app.vercel.app/](https://shaw-and-partners-app.vercel.app/)
 - **Backend**: [https://shaw-and-partners-backend-n5xh.onrender.com/](https://shaw-and-partners-backend-n5xh.onrender.com/)
 
-We encourage you to check out the live application and engage with its features.
-
-## Contributing
-
-Contributions to the Shaw And Partners Project are welcome. If you're looking to contribute, please follow the standard fork-and-pull request workflow on GitHub to submit your changes for review.
-
-We appreciate your interest in enhancing our application. Your contributions are invaluable to us.
-
----
-
-For further details or support regarding our project, feel free to raise an issue in the repository.
