@@ -1,11 +1,9 @@
 "use client";
 
 import { LordIcon } from "@/components/LordIcon";
-import SearchComponent from "@/components/Search";
 import TableComponent from "@/components/Table";
 import { useCsvData } from "@/context/CsvContext";
-import { FolderPlusIcon } from "@heroicons/react/24/outline";
-import { Suspense, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function MainContent() {
