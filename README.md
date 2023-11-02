@@ -99,7 +99,7 @@ For local backend setup:
 
 The application is fully deployed and can be accessed at the following URLs:
 
-# Because the hosted servers are free, performance may not be the best, I recommend running local with local pointing
+### Because the hosted servers are free, performance may not be the best, I recommend running local with local pointing
 
 - **Frontend**: [https://shaw-and-partners-app.vercel.app/](https://shaw-and-partners-app.vercel.app/)
 - **Backend**: [https://shaw-and-partners-backend-n5xh.onrender.com/](https://shaw-and-partners-backend-n5xh.onrender.com/)
