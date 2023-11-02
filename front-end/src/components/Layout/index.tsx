@@ -10,7 +10,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import ShawImage from "@/assets/pngs/shaw.png";
-import ProfilePic from "@/assets/pngs/profile.png";
+import ProfilePic from "@/assets/pngs/Profile.png";
 import { classNames } from "@/utils/useClassNames";
 
 // React
