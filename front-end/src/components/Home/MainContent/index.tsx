@@ -53,13 +53,15 @@ export default function MainContent() {
   const closeModal = () => {
     setIsModalOpen(false);
     setFileNames([]);
+    setFiles([])
   };
 
   const { uploadCsv } = useCsvData();
 
   const handleUpload = async () => {
     if (files.length === 0) {
-      setErrors({ documents: "Nenhum arquivo selecionado." });
+      setErrors({ documents: "Select a CSV document" });
+      toast.error("No documents selected")
       return;
     }
 
@@ -73,8 +75,10 @@ export default function MainContent() {
       console.error(error);
       setErrors({ documents: error.message });
     } finally {
-      setIsFetching(false);
-      closeModal();
+      setTimeout(() => {
+        setIsFetching(false);
+        closeModal();
+      }, 1000);
     }
   };
 
@@ -113,7 +117,7 @@ export default function MainContent() {
                   <div className="mt-6">
                     <div className="mt-6">
                       <div className="mt-2 sm:col-span-3">
-                        <label className="block mb-2 text-sm font-medium leading-6 text-gray-900">
+                        <label className="block mb-2 text-sm font-medium leading-6 text-primary">
                           Insira seus documentos abaixo
                         </label>
                         <div
@@ -150,7 +154,7 @@ export default function MainContent() {
                               >
                                 <span>
                                   {fileNames.length === 0 ? (
-                                    <span>Insira seus documentos</span>
+                                    <span className="text-secondary">Insira seus documentos</span>
                                   ) : (
                                     <span>
                                       Arquivos adicionados:{" "}

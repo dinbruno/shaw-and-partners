@@ -8,7 +8,8 @@ export interface CsvDataContextProps {
   searchCsvData: (query: string) => void;
   setSearchTerm?: (term: string) => void;
   loading?: boolean; 
-  error?: string | null; 
+  error?: string | null;
+  clearSearch?: () => void;
 }
 
 export interface CsvDataProviderProps {

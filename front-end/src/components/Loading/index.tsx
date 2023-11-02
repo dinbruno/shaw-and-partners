@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import lottie from "lottie-web";
-import animationData from "./loading.json";
+import { BeatLoader } from "react-spinners";
 
 function useLoadingDots(interval = 300, dots = 3) {
   const [frame, setFrame] = useState(0);
@@ -14,7 +14,11 @@ function useLoadingDots(interval = 300, dots = 3) {
     return () => clearInterval(timer);
   }, [interval, dots]);
 
-  return "Carregando, por favor aguarde" + ".".repeat(frame) + " ".repeat(dots - frame);
+  return (
+    "Carregando, por favor aguarde" +
+    ".".repeat(frame) +
+    " ".repeat(dots - frame)
+  );
 }
 
 function LottieAnimation({ animationData }: any) {
@@ -40,9 +44,11 @@ export default function LoadingComponent() {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="flex flex-col h-auto">
-        <p className="mt-4 text-white text-center pb-4 text-xl">{loadingText}</p>
-        <LottieAnimation animationData={animationData} />
+      <div className="flex flex-col h-auto justify-center items-center">
+        <p className="mt-4 text-white text-center pb-4 text-xl">
+          {loadingText}
+        </p>
+        <BeatLoader color="#1eaf2a" loading={true} size={20} />{" "}
       </div>
     </div>
   );

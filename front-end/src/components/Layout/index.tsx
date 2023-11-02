@@ -98,16 +98,16 @@ export default function LayoutComponent({ children }: ILayoutComponentProps) {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-gray-500 text-white"
-                                      : "text-white hover:text-white hover:bg-gray-50",
+                                      ? "bg-gray-100 text-primary"
+                                      : "text-primary hover:text-white hover:bg-gray-50",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? "text-white"
-                                        : "text-gray-400 group-hover:text-white",
+                                        ? "text-primary"
+                                        : "text-gray-400 group-hover:text-primary",
                                       "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
@@ -196,7 +196,7 @@ export default function LayoutComponent({ children }: ILayoutComponentProps) {
                   className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
                   aria-hidden="true"
                 />
-                <SearchComponent/>
+                <SearchComponent />
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <button
@@ -216,16 +216,18 @@ export default function LayoutComponent({ children }: ILayoutComponentProps) {
                   <Menu.Button className="-m-1.5 flex items-center p-1.5">
                     <span className="sr-only">Open user menu</span>
                     <Image
-                      className="h-8 w-8 rounded-full bg-gray-50"
+                      className="h-10 w-10 rounded-full"
                       src={ProfilePic}
                       alt="ProfilePic"
+                      width={100}
+                      height={100}
                     />
                     <span className="hidden lg:flex lg:items-center">
                       <span
                         className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                         aria-hidden="true"
                       >
-                        Tom Cook
+                        John Doe
                       </span>
                       <ChevronDownIcon
                         className="ml-2 h-5 w-5 text-gray-400"
@@ -269,7 +271,6 @@ export default function LayoutComponent({ children }: ILayoutComponentProps) {
             <div className="px-4 sm:px-6 lg:px-8">{children}</div>
           </main>
         </div>
-        
       </div>
     </>
   );

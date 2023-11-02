@@ -1,5 +1,6 @@
 import LayoutComponent from "@/components/Layout";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import CsvDataProvider from "@/context/CsvContext";
 
 export default function RootLayout({

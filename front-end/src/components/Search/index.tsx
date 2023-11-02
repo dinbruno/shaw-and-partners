@@ -3,17 +3,19 @@ import { useCsvData } from "@/context/CsvContext";
 
 const SearchComponent = () => {
   const [input, setInput] = useState("");
-  const { searchCsvData, loading, error } = useCsvData();
+  const { searchCsvData, loading, clearSearch } = useCsvData();
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (input) {
         searchCsvData(input);
+      } else {
+        clearSearch?.()
       }
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [input, searchCsvData]);
+  }, [input, searchCsvData, clearSearch]);
 
   return (
       <input
