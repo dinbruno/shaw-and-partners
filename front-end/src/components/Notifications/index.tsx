@@ -1,17 +1,32 @@
-"use client"
-import React, { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { useCsvData } from '@/context/CsvContext'
-import { LogEntry } from '@/context/types'
+"use client";
+import React, { Fragment } from "react";
+import { Popover, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useCsvData } from "@/context/CsvContext";
+import { LogEntry } from "@/context/types";
+import { BellIcon } from "@heroicons/react/24/outline";
+import { LordIcon } from "../LordIcon";
 
 export default function Notifications() {
-  const { uploadLogs } = useCsvData()
+  const { uploadLogs, clearAllNotifications } = useCsvData();
 
   return (
     <Popover className="relative">
-      <Popover.Button className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-        <span>Notifications</span>
+      <Popover.Button className="relative inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+        <LordIcon
+          src="https://cdn.lordicon.com/xkcqznly.json"
+          trigger="loop"
+          colors={{
+            primary: "#1e21c9",
+            secondary: "#1e21c9",
+          }}
+          size={28}
+        />
+        {uploadLogs.length > 0 && (
+          <span className="absolute top-3 right-4 inline-flex items-center justify-center h-4 w-4 text-xs font-semibold text-white bg-red-500 rounded-full">
+            {uploadLogs.length}
+          </span>
+        )}
         <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
       </Popover.Button>
 
@@ -25,16 +40,38 @@ export default function Notifications() {
         leaveTo="opacity-0 translate-y-1"
       >
         <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4 sm:px-0">
-          <div className="w-screen max-w-sm flex-auto rounded-3xl bg-white p-4 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+          <div className="w-screen max-w-sm flex-auto rounded-3xl bg-white p-8 text-sm leading-6 shadow-lg ring-1 ring-black/5 overflow-y-auto max-h-96">
             {uploadLogs.length === 0 ? (
               <div className="p-4 text-gray-500">No notifications</div>
             ) : (
-              uploadLogs.map((log: LogEntry, index: number) => (
-                <div key={index} className="relative rounded-lg p-4 hover:bg-gray-50">
-                  <span className="font-semibold text-gray-900">{log.message}</span>
-                  <p className="mt-1 text-gray-600">{log.date}</p>
-                </div>
-              ))
+              <>
+                {uploadLogs.map((log: LogEntry, index: number) => (
+                  <div
+                    key={index}
+                    className="relative rounded-lg p-4 hover:bg-gray-50"
+                  >
+                    <span className="font-semibold text-gray-900">
+                      {log.message}
+                    </span>
+                    <p className="mt-1 text-gray-600">{log.date}</p>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (clearAllNotifications) {
+                      clearAllNotifications();
+                    } else {
+                      console.error(
+                        "clearAllNotifications function is undefined"
+                      );
+                    }
+                  }}
+                  className="mt-4 w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                >
+                  Clear Notifications
+                </button>
+              </>
             )}
           </div>
         </Popover.Panel>

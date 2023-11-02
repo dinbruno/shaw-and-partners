@@ -22,6 +22,7 @@ import { ILayoutComponentProps } from "./types";
 import { navigation, userNavigation } from "./constants";
 import Image from "next/image";
 import SearchComponent from "../Search";
+import Notifications from "../Notifications";
 
 export default function LayoutComponent({ children }: ILayoutComponentProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -204,7 +205,7 @@ export default function LayoutComponent({ children }: ILayoutComponentProps) {
                   className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <Notifications/>
                 </button>
 
                 <div

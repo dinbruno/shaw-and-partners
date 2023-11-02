@@ -16,7 +16,7 @@ const CsvDataContext = createContext<CsvDataContextProps | undefined>(
   undefined
 );
 
-const LOG_KEY = 'uploadLogs';
+const LOG_KEY = "uploadLogs";
 
 const generateLogId = () => `log_${new Date().getTime()}`;
 
@@ -29,10 +29,10 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
   const [loading, setLoading] = useState(false);
   const [uploadLogs, setUploadLogs] = useState<LogEntry[]>(() => {
     const logs = localStorage.getItem(LOG_KEY);
-    return logs ? JSON.parse(logs) as LogEntry[] : [];
+    return logs ? (JSON.parse(logs) as LogEntry[]) : [];
   });
 
-  const { data } = useSWR(`${API_URL}/users`, fetcher);
+  const { data, mutate } = useSWR(`${API_URL}/users`, fetcher);
 
   const addLogEntry = (logEntry: LogEntry) => {
     const updatedLog = [logEntry, ...uploadLogs];
@@ -55,12 +55,14 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
       if (response.ok) {
         const logEntry = {
           id: generateLogId(),
-          message: "Upload de um arquivo feito em",
+          message: "Uploading a file made in",
           date: new Date().toLocaleString(),
         };
 
         addLogEntry(logEntry);
         toast.success("Document successfully sent!");
+
+        mutate();
       } else {
         throw new Error(result.message);
       }
@@ -69,7 +71,41 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
     } finally {
       setTimeout(() => {
         setLoading(false);
-      }, 500);
+      }, 1500);
+    }
+  };
+
+  const deleteAllFiles = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/files/delete`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        toast.success("All files have been successfully deleted!");
+
+        setCsvData([]);
+
+        const logEntry = {
+          id: generateLogId(),
+          message: "All files were deleted in!",
+          date: new Date().toLocaleString(),
+        };
+        addLogEntry(logEntry);
+
+        mutate();
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    } catch (error: any) {
+      console.error("Erro ao deletar arquivos:", error);
+      toast.error(`Erro ao deletar arquivos: ${error.message}`);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   };
 
@@ -87,6 +123,12 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
     }
   }, []);
 
+  const clearAllNotifications = useCallback(() => {
+    localStorage.removeItem(LOG_KEY);
+    setUploadLogs([]);
+    toast.info("All notifications have been cleared.");
+  }, []);
+
   const clearSearch = useCallback(() => {
     if (data?.data) {
       setCsvData(data.data);
@@ -98,11 +140,19 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
       setCsvData(data.data);
     }
   }, [data]);
-  
 
   return (
     <CsvDataContext.Provider
-      value={{ csvData, uploadCsv, searchCsvData, loading, clearSearch, uploadLogs  }}
+      value={{
+        csvData,
+        uploadCsv,
+        searchCsvData,
+        loading,
+        clearSearch,
+        uploadLogs,
+        deleteAllFiles,
+        clearAllNotifications,
+      }}
     >
       {children}
     </CsvDataContext.Provider>

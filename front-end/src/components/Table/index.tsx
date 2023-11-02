@@ -1,27 +1,28 @@
-import { FolderPlusIcon } from "@heroicons/react/24/outline";
+"use client";
+
+import { FolderPlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { TableComponentProps } from "./types";
 import { useCsvData } from "@/context/CsvContext";
 import TableSkeleton from "@/components/Skeleton";
 import Image from "next/image";
 import notFound from "@/assets/gifs/not-found.gif";
+import { useState } from "react";
 
 const TableComponent: React.FC<TableComponentProps> = ({ openModal }) => {
-  const { loading, csvData } = useCsvData();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { loading, csvData, deleteAllFiles } = useCsvData();
+
+  const handleDeleteAll = async () => {
+    setShowConfirmModal(false);
+    await deleteAllFiles();
+  };
 
   return (
     <>
       {!loading ? (
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="sm:flex sm:items-center">
-            <div className="sm:flex-auto">
-              <h1 className="text-base font-semibold leading-6 text-gray-900">
-                Users
-              </h1>
-              <p className="mt-2 text-sm text-gray-700">
-                A list of all users entered via the csv document with data such
-                as their name, city, country and favorite sport
-              </p>
-            </div>
+            <div className="sm:flex-auto"></div>
             <div className="mt-4 sm:ml-16 sm:mt-0 flex gap-4 justify-end md:justify-normal">
               <button
                 type="button"
@@ -30,6 +31,19 @@ const TableComponent: React.FC<TableComponentProps> = ({ openModal }) => {
               >
                 ADD CSV
                 <FolderPlusIcon className="h-6 w-6" />
+              </button>
+              <button
+                type="button"
+                disabled={!csvData.length}
+                onClick={() => setShowConfirmModal(true)}
+                className={`flex items-center hover:opacity-50 gap-2 rounded-md px-3 py-2 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                  csvData.length
+                    ? "bg-red-600 hover:bg-red-700"
+                    : "bg-gray-500 opacity-50 cursor-not-allowed"
+                }`}
+              >
+                Delete All
+                <TrashIcon className="h-6 w-6" />
               </button>
             </div>
           </div>
@@ -91,6 +105,30 @@ const TableComponent: React.FC<TableComponentProps> = ({ openModal }) => {
                   </div>
                 </div>
               </div>
+              {showConfirmModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                  <div className="bg-white p-4 rounded-lg shadow-lg">
+                    <h2 className="font-bold text-lg">Confirm Delete</h2>
+                    <p className="my-4">
+                      Are you sure you want to delete all items?
+                    </p>
+                    <div className="flex justify-end gap-4">
+                      <button
+                        onClick={() => setShowConfirmModal(false)}
+                        className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
+                      >
+                        No
+                      </button>
+                      <button
+                        onClick={handleDeleteAll}
+                        className="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-700"
+                      >
+                        Yes, Delete All
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </>
           ) : (
             <>
