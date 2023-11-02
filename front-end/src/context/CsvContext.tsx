@@ -8,9 +8,9 @@ import React, {
   useEffect,
 } from "react";
 import useSWR from "swr";
-import { API_URL } from "@/api/config";
 import { CsvDataContextProps, CsvDataProviderProps } from "./types";
 import { toast } from "react-toastify";
+import { API_URL } from "@/api/config";
 
 const CsvDataContext = createContext<CsvDataContextProps | undefined>(
   undefined
