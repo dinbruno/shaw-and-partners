@@ -32,7 +32,10 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
     return logs ? (JSON.parse(logs) as LogEntry[]) : [];
   });
 
-  const { data, mutate } = useSWR(`${API_URL}/users`, fetcher);
+  const { data, mutate } = useSWR(`${API_URL}/users`, fetcher, {
+    revalidateOnFocus: false, 
+    revalidateOnReconnect: false, 
+  });
 
   const addLogEntry = (logEntry: LogEntry) => {
     const updatedLog = [logEntry, ...uploadLogs];
