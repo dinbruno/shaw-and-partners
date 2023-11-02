@@ -15,7 +15,7 @@ function useLoadingDots(interval = 300, dots = 3) {
   }, [interval, dots]);
 
   return (
-    "Carregando, por favor aguarde" +
+    "Loading... please wait" +
     ".".repeat(frame) +
     " ".repeat(dots - frame)
   );

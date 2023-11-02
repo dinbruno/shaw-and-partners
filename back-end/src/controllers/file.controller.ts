@@ -13,7 +13,8 @@ class FileController {
 
   async deleteAllFiles(req: Request, res: Response): Promise<void> {
     try {
-      const uploadDirectory = path.join(__dirname, '..', 'dist', 'uploads');
+      const uploadDirectory = path.join(__dirname, '..', '..', 'uploads');
+
       const directoryService = new DirectoryService(uploadDirectory);
 
       await directoryService.deleteAllCurrentFiles();
