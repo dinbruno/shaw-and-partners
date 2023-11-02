@@ -1,7 +1,11 @@
+import dynamic from 'next/dynamic';
 import LayoutComponent from "@/components/Layout";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
-import CsvDataProvider from "@/context/CsvContext";
+
+const CsvDataProvider = dynamic(() => import('@/context/CsvContext'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
