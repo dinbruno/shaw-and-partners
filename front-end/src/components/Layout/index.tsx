@@ -200,13 +200,8 @@ export default function LayoutComponent({ children }: ILayoutComponentProps) {
                 <SearchComponent />
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
-                <button
-                  type="button"
-                  className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <Notifications/>
-                </button>
+                <span className="sr-only">View notifications</span>
+                <Notifications />
 
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200"
