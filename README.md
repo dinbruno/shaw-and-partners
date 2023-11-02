@@ -36,7 +36,7 @@ To start the frontend application, follow these steps:
 2. Change directory to the frontend folder:
 
     ```sh
-    cd front-end
+    cd frontend
     ```
 
 3. Install the required packages:
@@ -58,7 +58,7 @@ To execute the backend tests:
 1. Change to the backend directory:
 
     ```sh
-    cd back-end
+    cd backend
     ```
 
 2. Install dependencies:
@@ -80,7 +80,7 @@ For local backend setup:
 1. Navigate to the backend directory:
 
     ```sh
-    cd back-end
+    cd backend
     ```
 
 2. Install the necessary node modules:
