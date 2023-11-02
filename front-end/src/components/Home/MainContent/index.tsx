@@ -118,7 +118,7 @@ export default function MainContent() {
                     <div className="mt-6">
                       <div className="mt-2 sm:col-span-3">
                         <label className="block mb-2 text-sm font-medium leading-6 text-primary">
-                          Insira seus documentos abaixo
+                        Insert your documents below
                         </label>
                         <div
                           className={`flex max-w-2xl justify-center rounded-lg border ${
@@ -154,10 +154,10 @@ export default function MainContent() {
                               >
                                 <span>
                                   {fileNames.length === 0 ? (
-                                    <span className="text-secondary">Insira seus documentos</span>
+                                    <span className="text-secondary">Insert your documents</span>
                                   ) : (
                                     <span>
-                                      Arquivos adicionados:{" "}
+                                      Added files:{" "}
                                       {fileNames.join(", ")}
                                     </span>
                                   )}
@@ -173,7 +173,7 @@ export default function MainContent() {
                                 />
                               </label>
                               {fileNames.length === 0 && (
-                                <p className="pl-1">ou arraste para cá.</p>
+                                <p className="pl-1">or drag it here.</p>
                               )}
                             </div>
                             {errors.documents && (
