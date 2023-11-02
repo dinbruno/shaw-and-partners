@@ -15,6 +15,8 @@ export default function MainContent() {
   const [files, setFiles] = useState<File[]>([]);
 
   const modalContentRef = useRef<HTMLDivElement | null>(null);
+  const { uploadCsv } = useCsvData();
+
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -55,8 +57,6 @@ export default function MainContent() {
     setFileNames([]);
     setFiles([])
   };
-
-  const { uploadCsv } = useCsvData();
 
   const handleUpload = async () => {
     if (files.length === 0) {
@@ -154,7 +154,7 @@ export default function MainContent() {
                               >
                                 <span>
                                   {fileNames.length === 0 ? (
-                                    <span className="text-secondary">Insert your documents</span>
+                                    <span className="text-primary">Insert your documents</span>
                                   ) : (
                                     <span>
                                       Added files:{" "}
@@ -182,7 +182,7 @@ export default function MainContent() {
                               </p>
                             )}
                             <p className="text-xs leading-5 text-gray-600">
-                              Somente permitido arquivos<strong> .csv </strong>
+                              Only <strong>.csv</strong> files allowed
                             </p>
                           </div>
                         </div>

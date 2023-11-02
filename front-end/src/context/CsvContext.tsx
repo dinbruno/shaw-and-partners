@@ -115,6 +115,7 @@ export const CsvDataProvider: React.FC<CsvDataProviderProps> = ({
       const searchData = await fetcher(`${API_URL}/users?q=${query}`);
       setCsvData(searchData.data);
     } catch (error) {
+      toast.error(`Error fetching CSV data: ${error}`)
       console.error("Error fetching CSV data:", error);
     } finally {
       setTimeout(() => {

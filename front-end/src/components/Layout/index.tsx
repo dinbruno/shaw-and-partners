@@ -4,8 +4,6 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  BellIcon,
-  Cog6ToothIcon,
   MagnifyingGlassIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";

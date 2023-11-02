@@ -1,9 +1,9 @@
-import LoadingComponent from '@/components/Loading';
-import dynamic from 'next/dynamic';
+import LoadingComponent from "@/components/Loading";
+import dynamic from "next/dynamic";
 
-const MainContent = dynamic(() => import('@/components/Home/MainContent'), {
-  ssr: false, 
-  loading: () => <LoadingComponent/>
+const MainContent = dynamic(() => import("@/components/Home/MainContent"), {
+  ssr: false,
+  loading: () => <LoadingComponent />,
 });
 
 export default function Home() {
@@ -11,5 +11,5 @@ export default function Home() {
     <div>
       <MainContent />
     </div>
-  )
+  );
 }
